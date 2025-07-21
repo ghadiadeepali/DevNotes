@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from .managers import CustomUserManager
 
 # Create your models here.
 
@@ -19,3 +20,9 @@ class CustomUser(AbstractUser):
     # REQUIRED_FIELDS are only used when you run python manage.py craetesuperuser
     REQUIRED_FIELDS = ['name']  # Required when creating a superuser
     # “When creating a superuser from the command line, ask for these additional fields besides USERNAME_FIELD and password.”
+    
+    objects = CustomUserManager()  
+    # when someone runs CustomUser.objects.create_user(...) or create_superuser(...), use my logic, not the default."
+
+    def __str__(self):
+        return self.email
