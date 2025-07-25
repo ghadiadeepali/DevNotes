@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     "notes",
     "users",
     "rest_framework",
-    "rest_framework.authtoken"
+    "rest_framework.authtoken",
+    "workspaces"
 ]
 
 MIDDLEWARE = [
