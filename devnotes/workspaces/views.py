@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
@@ -20,3 +20,10 @@ def create_workspace(request):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors)
+
+@api_view(["GET"])
+def get_workspace_details(request, pk):
+    workspace = get_object_or_404(Workspace, pk=pk)
+    serializer = ListWorkspacesSerializer(workspace)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
