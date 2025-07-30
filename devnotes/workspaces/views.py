@@ -36,3 +36,9 @@ def update_a_workspace(request, pk):
         return Response(serializer.data, status=status.HTTP_200_OK)
     return Response(serializer.errors)
     
+    
+@api_view(["DELETE"])
+def delete_a_workspace(request, pk):
+    workspace = get_object_or_404(Workspace, pk=pk)
+    workspace.delete()
+    return Response({"msg": "Workspace deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
