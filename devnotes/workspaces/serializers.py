@@ -9,7 +9,7 @@ class ListWorkspacesSerializer(serializers.ModelSerializer):
         
 class CreateWorkspaceSerializer(serializers.ModelSerializer):
     description = serializers.CharField(required=False, allow_blank=True)
-    name = serializers.CharField(required=False, allow_blank=True)
+    name = serializers.CharField(required=False)
     class Meta:
         model = Workspace
         fields = ["name", "description"]
