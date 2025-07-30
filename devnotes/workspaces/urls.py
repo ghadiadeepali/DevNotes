@@ -4,5 +4,6 @@ urlpatterns = [
     path("",views.list_workspaces),
     path("create/", views.create_workspace),
     path("<int:pk>", views.get_workspace_details),
-    path("update/<int:pk>", views.update_a_workspace)
+    path("update/<int:pk>", views.update_a_workspace),
+    path("delete/<int:pk>", views.delete_a_workspace)
 ]
