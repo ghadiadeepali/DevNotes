@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 from workspaces.models import Workspace
+from users.models import CustomUser
 from workspaces.serializers import ListWorkspacesSerializer, CreateWorkspaceSerializer
 
 
@@ -46,6 +47,14 @@ def delete_a_workspace(request, pk):
 @api_view(["PUT"])
 def add_collaborator_to_a_workspace(request, workspace_id, user_id):
     workspace = Workspace.objects.get(pk=workspace_id)
+    if not CustomUser.objects.filter(id=user_id).exists():
+        return Response({"error": "User not found"}, status=404)
     workspace.collaborators.add(user_id)
     return Response({"msg":"Collaborator added successfully"})
+
     
+@api_view(["DELETE"])
+def remove_collaborator_from_a_workspace(request, workspace_id, user_id):
+    workspace = Workspace.objects.get(pk=workspace_id)
+    workspace.collaborators.remove(user_id)
+    return Response({"msg":"Collaborator removed successfully"})
