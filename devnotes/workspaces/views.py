@@ -42,3 +42,10 @@ def delete_a_workspace(request, pk):
     workspace = get_object_or_404(Workspace, pk=pk)
     workspace.delete()
     return Response({"msg": "Workspace deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
+
+@api_view(["PUT"])
+def add_collaborator_to_a_workspace(request, workspace_id, user_id):
+    workspace = Workspace.objects.get(pk=workspace_id)
+    workspace.collaborators.add(user_id)
+    return Response({"msg":"Collaborator added successfully"})
+    
